@@ -6,19 +6,28 @@ export default function() {
   const ex1 = 'use map to double each value and return'
   const exercise1 = _ => {
     const numbers = [1, 2, 4, 8, 16, 32]
-    return null // return answer here
+    const doubler = function(v) {
+      return v * 2
+    }
+    return map(doubler, numbers)
   }
 
   const ex2 = 'use filter to only return even numbers'
   const exercise2 = _ => {
     const numbers = [1, 2, 3, 4, 5, 6]
-    return [] // return answer here
+    var evens = numbers.filter(function(x) {
+      return x % 2 === 0
+    })
+    return evens
   }
 
   const ex3 = 'use reduce to sum the numbers'
   const exercise3 = _ => {
     const numbers = [1, 2, 3, 4, 5, 6]
-    return 0 // return answer here
+    const reducer = function(total, val) {
+      return total + val
+    }
+    return reduce(reducer, 0, numbers)
   }
 
   const ex4 = `use compose to run the following three commands
@@ -29,7 +38,30 @@ export default function() {
 `
   const exercise4 = _ => {
     const numbers = [1, 2, 4, 8, 16, 32]
-    return 0
+    const squared = function(x) {
+      return x * x;
+    }
+    const squareMap = map(squared);
+    console.log(map(squared, numbers))
+    const eights = function(x) {
+      if(x % 8 === 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    const result = filter(eights)
+    const reducer = function(total, val) {
+      return total + 1
+    }
+    const count = reduce(reducer, 0);
+    console.log(reduce(reducer, 0, numbers))
+    const final = compose(
+      count,
+      result,
+      squareMap
+    )
+    return final(numbers)
   }
 
   /* tests to validate exercises go here */
